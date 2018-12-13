@@ -35,4 +35,14 @@ export class HeroesComponent implements OnInit {
       });
   }
 
+  delete(hero: Hero) {
+    // removes hero from list
+    this.heroes = this.heroes.filter(h => h !== hero);
+    // messages service in order to delete hero from "DB"
+    // should subscribe, even if the response is not used
+    // if not, the service will not send the delete request to the server!
+    // An Observable does nothing until something subscribes!
+    this.heroService.delete(hero).subscribe();
+  }
+
 }
